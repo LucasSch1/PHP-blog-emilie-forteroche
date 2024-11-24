@@ -1,4 +1,4 @@
-## Blog d'Emilie Forteroche
+## Blog d'Emilie Forteroch
 
 ## Pour utiliser ce projet : 
 
