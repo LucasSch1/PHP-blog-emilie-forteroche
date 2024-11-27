@@ -25,6 +25,26 @@ class AdminController {
         ]);
     }
 
+
+    public function showAdminMonitoring() : void
+    {
+        // On vérifie que l'utilisateur est connecté.
+        $this->checkIfUserIsConnected();
+
+        // On récupère les articles.
+        $articleManager = new ArticleManager();
+        $articles = $articleManager->getAllArticlesOptions();
+
+
+
+
+        // On affiche la page d'administration.
+        $view = new View("AdministrationMonitoring");
+        $view->render("adminMonitoring", [
+            'articles' => $articles
+        ]);
+    }
+
     /**
      * Vérifie que l'utilisateur est connecté.
      * @return void
