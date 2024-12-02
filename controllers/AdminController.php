@@ -26,17 +26,22 @@ class AdminController {
     }
 
 
+    /**
+     * Affiche le tableau de bord de l'administration.
+     * @return void
+     */
     public function showAdminMonitoring() : void
     {
         // On vérifie que l'utilisateur est connecté.
         $this->checkIfUserIsConnected();
 
+        //On détermine les critères de tri et l'ordre à partir de GET
+        $sortBy = $_GET['sortBy'] ?? 'date_creation';
+        $order = $_GET['order'] ?? 'desc';
+
         // On récupère les articles.
         $articleManager = new ArticleManager();
-        $articles = $articleManager->getAllArticlesOptions();
-
-
-
+        $articles = $articleManager->getAllArticlesOptions($sortBy, $order);
 
         // On affiche la page d'administration.
         $view = new View("AdministrationMonitoring");
