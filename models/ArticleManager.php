@@ -22,19 +22,36 @@ class ArticleManager extends AbstractEntityManager
     }
 
 
-    public function getAllArticlesOptions() : array
+    /**
+     * Récupère une liste de tous les articles disponibles triés selon les options spécifiées.
+     *
+     * @param string $sortBy Le champ par lequel trier les articles, 'title', 'views', ou 'date_creation'. Par défaut 'date_creation'.
+     * @param string $order L'ordre de tri, 'asc' pour ascendant ou 'desc' pour descendant. Par défaut 'desc'.
+     * @return array Un tableau d'objets Article contenant la liste des articles triés.
+     */
+    public function getAllArticlesOptions(string $sortBy = 'date_creation', string $order = 'desc') : array
     {
-        $sql = "SELECT id, title, date_creation, views  FROM article";
+
+        //Vérifie si le triage donc la variable $sortBy contient une des valeurs situé dans la tableau sinon reset un tri sur la date de création
+        $validSortBy = ['title', 'views', 'date_creation'];
+        if (!in_array($sortBy, $validSortBy)) {
+            $sortBy = 'date_creation';
+        }
+
+        //Transformation de l'ordre de tri en majuscule pour la requete SQL
+        $order = strtolower($order) === 'asc' ? 'ASC' : 'DESC';
+
+        $sql = "SELECT id, title, date_creation, views  FROM article ORDER BY $sortBy $order";
         $result = $this->db->query($sql);
         $articles = [];
 
         while ($articleData = $result->fetch()) {
             $article = new Article($articleData);
 
-            // Récupère le nombre de commentaires pour cet article
+            // Récupère le nombre de commentaire pour cet article
             $commentsCount = $this->getCommentsCountByArticleId($article->getId());
 
-            // Définit le nombre de commentaires dans l'objet Article
+            // Défini le nombre de commentaires dans l'objet Article
             $article->setCommentsCount($commentsCount);
             // Ajoute l'article à la liste
             $articles[] = $article;
@@ -130,23 +147,19 @@ class ArticleManager extends AbstractEntityManager
         $stmt->execute();
     }
 
+    /**
+     * Récupère le nombre de commentaires associés à un article par son ID
+     *
+     * @param int $articleId : l'identifiant unique de l'article dont on veut compter les commentaires
+     * @return int : le nombre de commentaires pour l'article spécifié
+     */
     public function getCommentsCountByArticleId(int $articleId): int
     {
         $sql = "SELECT COUNT(*) as count FROM comment WHERE id_article = :articleId";
         $stmt = $this->db->query($sql, ['articleId' => $articleId]);
-        // Récupère le résultat
         $result = $stmt->fetch();
         return (int)($result['count'] ?? 0);
     }
 
-
-
-    public function getViewsByArticleId(int $id): int
-    {
-        $sql = "SELECT views FROM article WHERE id = :idArticle";
-        $result = $this->db->query($sql, ['idArticle' => $id]);
-
-        return (int) $result[0]['views'];
-    }
 
 }
