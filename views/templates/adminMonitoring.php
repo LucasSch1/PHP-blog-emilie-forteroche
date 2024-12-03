@@ -6,14 +6,29 @@
 <h2>Page de monitoring</h2>
 
 <div class="adminArticle">
-
-    <table style="width: 100%; border-collapse: collapse; text-align: center;">
+    <table class="adminMonitoringTable" ">
         <thead>
         <tr>
-            <th><a href="?action=showAdminMonitoring&sortBy=title&order=asc">Titre de l'article ↓ | <a href="?action=showAdminMonitoring&sortBy=title&order=desc">↑</a></th>
-            <th><a href="?action=showAdminMonitoring&sortBy=views&order=asc">Nombre de vues ↓ | <a href="?action=showAdminMonitoring&sortBy=views&order=desc">↑</a></th>
-            <th><a href="?action=showAdminMonitoring&sortBy=comments_count&order=asc">Nombre de commentaires ↓ | <a href="?action=showAdminMonitoring&sortBy=comments_count&order=desc">↑</a> </th>
-            <th><a href="?action=showAdminMonitoring&sortBy=date_creation&order=asc">Date de publication ↓ | <a href="?action=showAdminMonitoring&sortBy=date_creation&order=desc">↑</a> </th>
+            <th>
+                <a href="?action=showAdminMonitoring&sortBy=title&order=<?= $sortBy === 'title' && $order === 'asc' ? 'desc' : 'asc' ?>">
+                    Titre de l'article <?= AdminController::getSortArrow('title', $sortBy, $order) ?>
+                </a>
+            </th>
+            <th>
+                <a href="?action=showAdminMonitoring&sortBy=views&order=<?= $sortBy === 'views' && $order === 'asc' ? 'desc' : 'asc' ?>">
+                    Nombre de vues <?= AdminController::getSortArrow('views', $sortBy, $order) ?>
+                </a>
+            </th>
+            <th>
+                <a href="?action=showAdminMonitoring&sortBy=comments_count&order=<?= $sortBy === 'comments_count' && $order === 'asc' ? 'desc' : 'asc' ?>">
+                    Nombre de commentaires <?= AdminController::getSortArrow('comments_count', $sortBy, $order) ?>
+                </a>
+            </th>
+            <th>
+                <a href="?action=showAdminMonitoring&sortBy=date_creation&order=<?= $sortBy === 'date_creation' && $order === 'asc' ? 'desc' : 'asc' ?>">
+                    Date de publication <?= AdminController::getSortArrow('date_creation', $sortBy, $order) ?>
+                </a>
+            </th>
         </tr>
         </thead>
         <tbody>
