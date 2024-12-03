@@ -43,10 +43,18 @@ class AdminController {
         $articleManager = new ArticleManager();
         $articles = $articleManager->getAllArticlesOptions($sortBy, $order);
 
+
+        // On récupère la flèche de triage
+        $adminController = new AdminController();
+        $sortArrow = $adminController->getSortArrow($sortBy, $sortBy, $order);
+
         // On affiche la page d'administration.
         $view = new View("AdministrationMonitoring");
         $view->render("adminMonitoring", [
-            'articles' => $articles
+            'articles' => $articles,
+            'sortBy' => $sortBy,
+            'order' => $order
+
         ]);
     }
 
@@ -201,4 +209,12 @@ class AdminController {
         // On redirige vers la page d'administration.
         Utils::redirect("admin");
     }
+
+    public static function getSortArrow($column, $currentSort, $currentOrder) {
+        if ($column == $currentSort) {
+            return $currentOrder == 'asc' ? '↓' : '↑';
+        }
+        return '';
+    }
+
 }
