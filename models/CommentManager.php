@@ -55,6 +55,11 @@ class CommentManager extends AbstractEntityManager
     }
 
 
+    /**
+     * Supprime un commentaire par son identifiant.
+     * @param int $commentId : l'identifiant du commentaire.
+     * @return bool : true si le commentaire a été supprimé, false sinon.
+     */
     public function deleteCommentById(int $commentId): bool
     {
         $sql = "DELETE FROM comment WHERE id = :id";

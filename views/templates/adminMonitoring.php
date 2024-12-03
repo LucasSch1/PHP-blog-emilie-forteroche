@@ -10,6 +10,7 @@
         <thead>
         <tr>
             <th>
+                <!-- permet à l'utilisateur de cliquer pour changer l'ordre de tri des articles par titre et affiche une indication visuelle de l'ordre actuel à l'aide d'une flèche.-->
                 <a href="?action=showAdminMonitoring&sortBy=title&order=<?= $sortBy === 'title' && $order === 'asc' ? 'desc' : 'asc' ?>">
                     Titre de l'article <?= AdminController::getSortArrow('title', $sortBy, $order) ?>
                 </a>
@@ -32,7 +33,8 @@
         </tr>
         </thead>
         <tbody>
-            <?php foreach ($articles as $article) { ?>
+            <?php
+            foreach ($articles as $article) { ?>
                 <tr>
                     <td><?= htmlspecialchars($article->getTitle()) ?></td>
                     <td><?= htmlspecialchars($article->getViews()) ?></td>
@@ -43,5 +45,3 @@
         </tbody>
     </table>
 </div>
-
-<a class="submit" href="index.php?action=showUpdateArticleForm">Ajouter un article</a>

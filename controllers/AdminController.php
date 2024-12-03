@@ -210,6 +210,15 @@ class AdminController {
         Utils::redirect("admin");
     }
 
+    /**
+     * Détermine la flèche de tri à afficher en fonction de la colonne et de l’ordre de tri actuels.
+     *
+     * @param string $column La colonne en cours d’évaluation.
+     * @param string $currentSort La colonne triée actuelle.
+     * @param string $currentOrder L’ordre actuel de tri, soit 'asc' ou 'desc'.
+     * @return string Renvoie ' ' si la colonne est la colonne triée actuelle et que l’ordre est croissant,
+     *   ' ' si l’ordre est décroissant, ou une chaîne vide si la colonne n’est pas triée.
+     */
     public static function getSortArrow($column, $currentSort, $currentOrder) {
         if ($column == $currentSort) {
             return $currentOrder == 'asc' ? '↓' : '↑';
