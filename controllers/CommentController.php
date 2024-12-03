@@ -44,4 +44,31 @@ class CommentController
         // On redirige vers la page de l'article.
         Utils::redirect("showArticle", ['id' => $idArticle]);
     }
+
+
+
+
+    public function deleteComment() : void{
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['commentId'])) {
+            $commentId = intval($_POST['commentId']); // Convertir en entier pour la sécurité
+
+            try {
+                $commentManager = new CommentManager();
+                $commentManager->deleteCommentById($commentId);
+                // Redirige vers la même page pour rafraîchir
+                header("Location: " . $_SERVER['HTTP_REFERER']);
+            exit();
+            } catch (Exception $e) {
+                // Afficher un message d'erreur approprié
+                echo "Erreur : " . $e->getMessage();
+            }
+        }
+
+    }
+
+
+
+
+
+
 }
