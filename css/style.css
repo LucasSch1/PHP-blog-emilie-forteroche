@@ -337,6 +337,41 @@ a.info {
     border: 1px solid var(--backgroundColor);
 }
 
+/**
+ * Partie adminMonitoring
+ */
+
+.adminMonitoringTable {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+
+.adminMonitoringTable th,
+.adminMonitoringTable td {
+    border: 1px solid black; /* Bordures internes */
+    padding: 8px; /* Ajoute de l'espace dans les cellules */
+}
+
+.adminMonitoringTable thead tr {
+    background-color: #255E33; /* Couleur spécifique pour l'en-tête */
+    color: white; /* Texte en blanc pour l'en-tête */
+}
+
+.adminMonitoringTable tbody tr:nth-child(odd) {
+    background-color: #99A140; /* Couleur pour les lignes impaires */
+}
+.adminMonitoringTable  tbody tr:nth-child(even) {
+    background-color: #D79922; /* Couleur pour les lignes paires */
+}
+
+
+
+
+
+
 /** 
  * Footer global de la page.
  */
@@ -350,3 +385,5 @@ footer {
     color: white;
     background-color: var(--headerColor);
 }
+
+
