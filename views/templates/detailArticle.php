@@ -31,6 +31,13 @@
                 echo '  <div class="detailComment">';
                 echo '      <h3 class="info">Le ' . Utils::convertDateToFrenchFormat($comment->getDateCreation()) . ", " . Utils::format($comment->getPseudo()) . ' a écrit :</h3>';
                 echo '      <p class="content">' . Utils::format($comment->getContent()) . '</p>';
+                // Condition pour afficher le bouton "Supprimer" si l'utilisateur est connecté
+                if (isset($_SESSION['user'])) {
+                    echo '      <form method="post" action="?action=deleteComment" class="formDelete"">';
+                    echo '          <input type="hidden" name="commentId" value="' . htmlspecialchars($comment->getId()) . '">';
+                    echo '          <button type="submit" class="delete-button">Supprimer</button>';
+                    echo '      </form>';
+                }
                 echo '  </div>';
                 echo '</li>';
             }               
