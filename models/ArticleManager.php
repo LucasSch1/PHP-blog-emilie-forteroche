@@ -32,8 +32,8 @@ class ArticleManager extends AbstractEntityManager
     public function getAllArticlesOptions(string $sortBy = 'date_creation', string $order = 'desc') : array
     {
 
-        //Vérifie si le triage donc la variable $sortBy contient une des valeurs situé dans la tableau sinon reset un tri sur la date de création
-        $validSortBy = ['title', 'views', 'date_creation'];
+        //Vérifie si le triage donc la variable $sortBy contient une des valeurs situé dans le tableau sinon reset un tri sur la date de création
+        $validSortBy = ['title', 'views', 'comments_count', 'date_creation'];
         if (!in_array($sortBy, $validSortBy)) {
             $sortBy = 'date_creation';
         }
@@ -41,7 +41,7 @@ class ArticleManager extends AbstractEntityManager
         //Transformation de l'ordre de tri en majuscule pour la requete SQL
         $order = strtolower($order) === 'asc' ? 'ASC' : 'DESC';
 
-        $sql = "SELECT id, title, date_creation, views  FROM article ORDER BY $sortBy $order";
+        $sql = "SELECT a.id, a.title, a.date_creation, a.views, COUNT(c.id) AS comments_count FROM article a LEFT JOIN comment c ON a.id = c.id_article GROUP BY a.id ORDER BY $sortBy $order;";
         $result = $this->db->query($sql);
         $articles = [];
 
