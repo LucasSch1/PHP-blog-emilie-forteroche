@@ -112,6 +112,22 @@ form .formGrid .submit {
     border: none;
 }
 
+.detailComment form{
+    display: inline-flex;
+    justify-content: flex-start;
+    background-color: #F1F0EB;
+    margin : 0;
+    padding: 10px;
+}
+
+.detailComment form .delete-button{
+    background-color: #F13C1F;
+    font-weight: bold;
+    color: white;
+    border: 5px solid #F13C1F;
+}
+
+
 /**
  * Coin replié des formulaires
  */
