@@ -367,26 +367,24 @@ a.info {
 
 .adminMonitoringTable th,
 .adminMonitoringTable td {
-    border: 1px solid black; /* Bordures internes */
-    padding: 8px; /* Ajoute de l'espace dans les cellules */
+    border: 1px solid black;
+    padding: 8px;
 }
 
 .adminMonitoringTable thead tr {
-    background-color: #255E33; /* Couleur spécifique pour l'en-tête */
-    color: white; /* Texte en blanc pour l'en-tête */
+    background-color: #255E33;
+    color: white;
 }
 
+/* On définit la couleur pour les lignes impaires du tableau  */
 .adminMonitoringTable tbody tr:nth-child(odd) {
-    background-color: #99A140; /* Couleur pour les lignes impaires */
+    background-color: #99A140;
 }
+
+/* On définit la couleur pour les lignes paires du tableau  */
 .adminMonitoringTable  tbody tr:nth-child(even) {
-    background-color: #D79922; /* Couleur pour les lignes paires */
+    background-color: #D79922;
 }
-
-
-
-
-
 
 /** 
  * Footer global de la page.
