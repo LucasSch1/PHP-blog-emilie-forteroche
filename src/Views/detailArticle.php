@@ -3,6 +3,9 @@
      * Ce template affiche un article et ses commentaires.
      * Il affiche également un formulaire pour ajouter un commentaire.
      */
+
+use App\src\Utils\Utils;
+
 ?>
 
 <article class="mainArticle">

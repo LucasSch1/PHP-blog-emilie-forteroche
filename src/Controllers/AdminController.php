@@ -2,9 +2,19 @@
 /**
  * Contrôleur de la partie admin.
  */
- 
-class AdminController {
 
+namespace App\src\Controllers;
+
+
+use App\src\Models\Article;
+use App\src\Models\ArticleManager;
+use App\src\Models\UserManager;
+use App\src\Utils\Utils;
+use App\src\views\View;
+use Exception;
+
+class AdminController
+{
     /**
      * Affiche la page d'administration.
      * @return void

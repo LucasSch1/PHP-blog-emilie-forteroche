@@ -1,6 +1,9 @@
 <?php
 /**
  * Affichage de la partie adminMonitoring : Affichage d'un tableau contenant le nom de l'article, suivi du nombre de vues , nombre de commentaires et de la date de publication */
+
+use App\src\Controllers\AdminController;
+
 ?>
 
 <h2>Page de monitoring</h2>
@@ -16,8 +19,8 @@
                 </a>
             </th>
             <th>
-                <a href="?action=showAdminMonitoring&sortBy=views&order=<?= $sortBy === 'views' && $order === 'asc' ? 'desc' : 'asc' ?>">
-                    Nombre de vues <?= AdminController::getSortArrow('views', $sortBy, $order) ?>
+                <a href="?action=showAdminMonitoring&sortBy=views&order=<?= $sortBy === 'Views' && $order === 'asc' ? 'desc' : 'asc' ?>">
+                    Nombre de vues <?= AdminController::getSortArrow('Views', $sortBy, $order) ?>
                 </a>
             </th>
             <th>
@@ -43,5 +46,4 @@
                 </tr>
             <?php } ?>
         </tbody>
-    </table>
 </div>

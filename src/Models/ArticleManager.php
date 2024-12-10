@@ -1,15 +1,17 @@
 <?php
 
+namespace App\src\Models;
+
 /**
  * Classe qui gère les articles.
  */
-class ArticleManager extends AbstractEntityManager 
+class ArticleManager extends AbstractEntityManager
 {
     /**
      * Récupère tous les articles.
      * @return array : un tableau d'objets Article.
      */
-    public function getAllArticles() : array
+    public function getAllArticles(): array
     {
         $sql = "SELECT * FROM article";
         $result = $this->db->query($sql);
@@ -25,15 +27,15 @@ class ArticleManager extends AbstractEntityManager
     /**
      * Récupère une liste de tous les articles disponibles triés selon les options spécifiées.
      *
-     * @param string $sortBy Le champ par lequel trier les articles, 'title', 'views', ou 'date_creation'. Par défaut 'date_creation'.
+     * @param string $sortBy Le champ par lequel trier les articles, 'title', 'Views', ou 'date_creation'. Par défaut 'date_creation'.
      * @param string $order L'ordre de tri, 'asc' pour ascendant ou 'desc' pour descendant. Par défaut 'desc'.
      * @return array Un tableau d'objets Article contenant la liste des articles triés.
      */
-    public function getAllArticlesOptions(string $sortBy = 'date_creation', string $order = 'desc') : array
+    public function getAllArticlesOptions(string $sortBy = 'date_creation', string $order = 'desc'): array
     {
 
         //Vérifie si le triage donc la variable $sortBy contient une des valeurs situé dans le tableau sinon reset un tri sur la date de création
-        $validSortBy = ['title', 'views', 'comments_count', 'date_creation'];
+        $validSortBy = ['title', 'Views', 'comments_count', 'date_creation'];
         if (!in_array($sortBy, $validSortBy)) {
             $sortBy = 'date_creation';
         }
@@ -41,7 +43,7 @@ class ArticleManager extends AbstractEntityManager
         //Transformation de l'ordre de tri en majuscule pour la requete SQL
         $order = strtolower($order) === 'asc' ? 'ASC' : 'DESC';
 
-        $sql = "SELECT a.id, a.title, a.date_creation, a.views, COUNT(c.id) AS comments_count FROM article a LEFT JOIN comment c ON a.id = c.id_article GROUP BY a.id ORDER BY $sortBy $order;";
+        $sql = "SELECT a.id, a.title, a.date_creation, a.Views, COUNT(c.id) AS comments_count FROM article a LEFT JOIN comment c ON a.id = c.id_article GROUP BY a.id ORDER BY $sortBy $order;";
         $result = $this->db->query($sql);
         $articles = [];
 
@@ -59,13 +61,13 @@ class ArticleManager extends AbstractEntityManager
         }
         return $articles;
     }
-    
+
     /**
      * Récupère un article par son id.
      * @param int $id : l'id de l'article.
      * @return Article|null : un objet Article ou null si l'article n'existe pas.
      */
-    public function getArticleById(int $id) : ?Article
+    public function getArticleById(int $id): ?Article
     {
         $sql = "SELECT * FROM article WHERE id = :id";
         $result = $this->db->query($sql, ['id' => $id]);
@@ -82,7 +84,7 @@ class ArticleManager extends AbstractEntityManager
      * @param Article $article : l'article à ajouter ou modifier.
      * @return void
      */
-    public function addOrUpdateArticle(Article $article) : void 
+    public function addOrUpdateArticle(Article $article): void
     {
         if ($article->getId() == -1) {
             $this->addArticle($article);
@@ -96,7 +98,7 @@ class ArticleManager extends AbstractEntityManager
      * @param Article $article : l'article à ajouter.
      * @return void
      */
-    public function addArticle(Article $article) : void
+    public function addArticle(Article $article): void
     {
         $sql = "INSERT INTO article (id_user, title, content, date_creation) VALUES (:id_user, :title, :content, NOW())";
         $this->db->query($sql, [
@@ -111,7 +113,7 @@ class ArticleManager extends AbstractEntityManager
      * @param Article $article : l'article à modifier.
      * @return void
      */
-    public function updateArticle(Article $article) : void
+    public function updateArticle(Article $article): void
     {
         $sql = "UPDATE article SET title = :title, content = :content, date_update = NOW() WHERE id = :id";
         $this->db->query($sql, [
@@ -126,7 +128,7 @@ class ArticleManager extends AbstractEntityManager
      * @param int $id : l'id de l'article à supprimer.
      * @return void
      */
-    public function deleteArticle(int $id) : void
+    public function deleteArticle(int $id): void
     {
         $sql = "DELETE FROM article WHERE id = :id";
         $this->db->query($sql, ['id' => $id]);
@@ -139,9 +141,9 @@ class ArticleManager extends AbstractEntityManager
      * @param int $id : l’identifiant unique de l’article à mettre à jour
      * @return void
      */
-    public function incrementViews($id) : void
+    public function incrementViews($id): void
     {
-        $sql = "UPDATE article SET views = views + 1 WHERE id = :id";
+        $sql = "UPDATE article SET Views = Views + 1 WHERE id = :id";
         $stmt = $this->db->getPDO()->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();

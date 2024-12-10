@@ -1,7 +1,9 @@
 <?php
 
+namespace App\src\Models;
+
 /**
- * Cette classe sert à gérer les commentaires. 
+ * Cette classe sert à gérer les commentaires.
  */
 class CommentManager extends AbstractEntityManager
 {
@@ -10,7 +12,7 @@ class CommentManager extends AbstractEntityManager
      * @param int $idArticle : l'id de l'article.
      * @return array : un tableau d'objets Comment.
      */
-    public function getAllCommentsByArticleId(int $idArticle) : array
+    public function getAllCommentsByArticleId(int $idArticle): array
     {
         $sql = "SELECT * FROM comment WHERE id_article = :idArticle";
         $result = $this->db->query($sql, ['idArticle' => $idArticle]);
@@ -27,7 +29,7 @@ class CommentManager extends AbstractEntityManager
      * @param int $id : l'id du commentaire.
      * @return Comment|null : un objet Comment ou null si le commentaire n'existe pas.
      */
-    public function getCommentById(int $id) : ?Comment
+    public function getCommentById(int $id): ?Comment
     {
         $sql = "SELECT * FROM comment WHERE id = :id";
         $result = $this->db->query($sql, ['id' => $id]);
@@ -43,7 +45,7 @@ class CommentManager extends AbstractEntityManager
      * @param Comment $comment : l'objet Comment à ajouter.
      * @return bool : true si l'ajout a réussi false sinon.
      */
-    public function addComment(Comment $comment) : bool
+    public function addComment(Comment $comment): bool
     {
         $sql = "INSERT INTO comment (pseudo, content, id_article, date_creation) VALUES (:pseudo, :content, :idArticle, NOW())";
         $result = $this->db->query($sql, [

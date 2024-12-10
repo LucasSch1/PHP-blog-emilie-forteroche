@@ -1,12 +1,18 @@
 <?php
 
-class CommentController 
+namespace App\src\Controllers;
+use App\src\models\ArticleManager;
+use App\src\models\Comment;
+use App\src\models\CommentManager;
+use App\src\Utils\Utils;
+
+class CommentController
 {
     /**
      * Ajoute un commentaire.
      * @return void
      */
-    public function addComment() : void
+    public function addComment(): void
     {
         // Récupération des données du formulaire.
         $pseudo = Utils::request("pseudo");
@@ -58,7 +64,8 @@ class CommentController
      *
      * @return void
      */
-    public function deleteComment() : void{
+    public function deleteComment(): void
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['commentId'])) {
             $commentId = intval($_POST['commentId']); // Convertir en entier pour la sécurité
 
@@ -67,7 +74,7 @@ class CommentController
                 $commentManager->deleteCommentById($commentId);
                 // Redirige vers la même page pour rafraîchir
                 header("Location: " . $_SERVER['HTTP_REFERER']);
-            exit();
+                exit();
             } catch (Exception $e) {
                 // Afficher un message d'erreur approprié
                 echo "Erreur : " . $e->getMessage();
@@ -75,10 +82,6 @@ class CommentController
         }
 
     }
-
-
-
-
 
 
 }
