@@ -1,6 +1,6 @@
 <?php
 
-namespace App\src\Models;
+namespace App\Models;
 
 /**
  * Cette classe sert à gérer les commentaires.
@@ -67,7 +67,5 @@ class CommentManager extends AbstractEntityManager
         $sql = "DELETE FROM comment WHERE id = :id";
         $result = $this->db->query($sql, ['id' => $commentId]);
         return $result->rowCount() > 0;
-
     }
-
 }

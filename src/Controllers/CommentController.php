@@ -1,10 +1,12 @@
 <?php
 
-namespace App\src\Controllers;
-use App\src\models\ArticleManager;
-use App\src\models\Comment;
-use App\src\models\CommentManager;
-use App\src\Utils\Utils;
+namespace App\Controllers;
+
+use App\Models\ArticleManager;
+use App\Models\Comment;
+use App\Models\CommentManager;
+use App\Utils\Utils;
+use Exception;
 
 class CommentController
 {
@@ -80,8 +82,5 @@ class CommentController
                 echo "Erreur : " . $e->getMessage();
             }
         }
-
     }
-
-
 }

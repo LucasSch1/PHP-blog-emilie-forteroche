@@ -1,10 +1,10 @@
 <?php
 
-namespace App\src\Models;
+namespace App\Models;
 
 abstract class AbstractEntity
 {
-    // Par défaut l'id vaut -1, ce qui permet de vérifier facilement si l'entité est nouvelle ou pas. 
+    // Par défaut l'id vaut -1, ce qui permet de vérifier facilement si l'entité est nouvelle ou pas.
     protected int $id = -1;
 
     /**

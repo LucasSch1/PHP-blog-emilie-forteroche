@@ -1,6 +1,9 @@
 <?php
 
-namespace App\src\views;
+namespace App\Views;
+
+use Exception;
+
 /**
  * Cette classe génère les vues en fonction de ce que chaque contrôlleur lui passe en paramètre.
  */
@@ -31,8 +34,8 @@ class View
         // On s'occupe de la vue envoyée
         $viewPath = $this->buildViewPath($viewName);
 
-        // Les deux variables ci-dessous sont utilisées dans le "main.php" qui est le template principal.
-        $content = $this->_renderViewFromTemplate($viewPath, $params);
+        // Les deux variables ci-dessous sont utilisées dans le "main.php" qui est le templates principal.
+        $content = $this->renderViewFromTemplate($viewPath, $params);
         $title = $this->title;
         ob_start();
         require(MAIN_VIEW_PATH);
@@ -46,10 +49,10 @@ class View
      * @return string : le contenu de la vue.
      * @throws Exception : si la vue n'existe pas.
      */
-    private function _renderViewFromTemplate(string $viewPath, array $params = []): string
+    private function renderViewFromTemplate(string $viewPath, array $params = []): string
     {
         if (file_exists($viewPath)) {
-            extract($params); // On transforme les diverses variables stockées dans le tableau "params" en véritables variables qui pourront être lues dans le template.
+            extract($params); // On transforme les diverses variables stockées dans le tableau "params" en véritables variables qui pourront être lues dans le templates.
             ob_start();
             require($viewPath);
             return ob_get_clean();
@@ -68,6 +71,3 @@ class View
         return TEMPLATE_VIEW_PATH . $viewName . '.php';
     }
 }
-
-
-

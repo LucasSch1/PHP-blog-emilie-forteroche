@@ -1,10 +1,12 @@
 <?php
 
-namespace App\src\Controllers;
-use App\src\models\ArticleManager;
-use App\src\models\CommentManager;
-use App\src\Utils\Utils;
-use App\src\views\View;
+namespace App\Controllers;
+
+use App\Models\ArticleManager;
+use App\Models\CommentManager;
+use App\Utils\Utils;
+use App\Views\View;
+use Exception;
 
 class ArticleController
 {

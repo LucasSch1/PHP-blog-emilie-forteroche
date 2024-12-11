@@ -1,6 +1,6 @@
 <?php
 
-namespace App\src\Models;
+namespace App\Models;
 
 /**
  * Classe qui gère les articles.
@@ -35,7 +35,7 @@ class ArticleManager extends AbstractEntityManager
     {
 
         //Vérifie si le triage donc la variable $sortBy contient une des valeurs situé dans le tableau sinon reset un tri sur la date de création
-        $validSortBy = ['title', 'Views', 'comments_count', 'date_creation'];
+        $validSortBy = ['title', 'views', 'comments_count', 'date_creation'];
         if (!in_array($sortBy, $validSortBy)) {
             $sortBy = 'date_creation';
         }
@@ -43,7 +43,7 @@ class ArticleManager extends AbstractEntityManager
         //Transformation de l'ordre de tri en majuscule pour la requete SQL
         $order = strtolower($order) === 'asc' ? 'ASC' : 'DESC';
 
-        $sql = "SELECT a.id, a.title, a.date_creation, a.Views, COUNT(c.id) AS comments_count FROM article a LEFT JOIN comment c ON a.id = c.id_article GROUP BY a.id ORDER BY $sortBy $order;";
+        $sql = "SELECT a.id, a.title, a.date_creation, a.views, COUNT(c.id) AS comments_count FROM article a LEFT JOIN comment c ON a.id = c.id_article GROUP BY a.id ORDER BY $sortBy $order;";
         $result = $this->db->query($sql);
         $articles = [];
 
@@ -57,7 +57,6 @@ class ArticleManager extends AbstractEntityManager
             $article->setCommentsCount($commentsCount);
             // Ajoute l'article à la liste
             $articles[] = $article;
-
         }
         return $articles;
     }
@@ -162,6 +161,4 @@ class ArticleManager extends AbstractEntityManager
         $result = $stmt->fetch();
         return (int)($result['count'] ?? 0);
     }
-
-
 }

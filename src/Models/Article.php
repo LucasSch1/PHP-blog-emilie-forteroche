@@ -1,6 +1,6 @@
 <?php
 
-namespace App\src\Models;
+namespace App\Models;
 
 use DateTime;
 
@@ -123,7 +123,7 @@ class Article extends AbstractEntity
 
     /**
      * Setter pour la date de mise à jour. Si la date est une string, on la convertit en DateTime.
-     * @param string|DateTime $dateUpdate
+     * @param string|DateTime|null $dateUpdate
      * @param string $format : le format pour la convertion de la date si elle est une string.
      * Par défaut, c'est le format de date mysql qui est utilisé.
      */
@@ -163,6 +163,4 @@ class Article extends AbstractEntity
     {
         return $this->views;
     }
-
-
 }

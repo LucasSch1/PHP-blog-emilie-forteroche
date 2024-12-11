@@ -1,6 +1,6 @@
 <?php
 
-namespace App\src\Models;
+namespace App\Models;
 
 /**
  * Entité User : un user est défini par son id, un login et un password.

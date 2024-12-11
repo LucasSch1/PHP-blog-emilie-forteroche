@@ -1,14 +1,16 @@
 <?php
+
     /**
-     * Affichage de Liste des articles. 
+     * Affichage de Liste des articles.
      */
 
-use App\src\Utils\Utils;
+use App\Utils\Utils;
 
 ?>
 
 <div class="articleList">
-    <?php foreach($articles as $article) { ?>
+    <?php foreach ($articles as $article) {
+        ?>
         <article class="article">
             <h2><?= $article->getTitle() ?></h2>
             <span class="quotation">«</span>
@@ -19,5 +21,6 @@ use App\src\Utils\Utils;
                 <a class="info" href="index.php?action=showArticle&id=<?= $article->getId() ?>">Lire +</a>
             </div>
         </article>
-    <?php } ?>
+        <?php
+    } ?>
 </div>

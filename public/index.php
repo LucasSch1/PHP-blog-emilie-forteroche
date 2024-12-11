@@ -1,12 +1,16 @@
 <?php
 
-use App\src\controllers\ArticleController;
-use App\src\controllers\CommentController;
-use App\src\Utils\Utils;
-use App\src\views\View;
+namespace App\public\index;
 
-require_once 'Config/Config.php';
-require_once 'Config/autoload.php';
+use App\Controllers\AdminController;
+use App\Controllers\ArticleController;
+use App\Controllers\CommentController;
+use App\Utils\Utils;
+use App\Views\View;
+use Exception;
+
+require_once '../src/Config/config.php';
+require_once '../vendor/autoload.php';
 
 // On récupère l'action demandée par l'utilisateur.
 // Si aucune action n'est demandée, on affiche la page d'accueil.

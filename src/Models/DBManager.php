@@ -1,6 +1,7 @@
 <?php
 
-namespace App\src\Models;
+namespace App\Models;
+
 use PDO;
 use PDOStatement;
 
@@ -69,5 +70,4 @@ class DBManager
         }
         return $query;
     }
-
 }

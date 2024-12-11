@@ -1,6 +1,6 @@
 <?php
 
-namespace App\src\Models;
+namespace App\Models;
 
 use DateTime;
 
@@ -95,5 +95,4 @@ class Comment extends AbstractEntity
         }
         $this->dateCreation = $dateCreation;
     }
-
 }
